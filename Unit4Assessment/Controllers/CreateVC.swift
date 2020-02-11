@@ -7,10 +7,23 @@
 //
 
 import UIKit
+import DataPersistence
+
+protocol  SaveFlashCardDelegate: AnyObject {
+    func didSave(thisCard: SavedCards)
+}
+
 
 class CreateVC: UIViewController {
     
     private let createView = CreateView()
+    
+    public var dataPersistence: DataPersistence<SavedCards>!
+    
+    weak var delegate: SaveFlashCardDelegate?
+    
+    var flashcard: SavedCards!
+    
     
     override func loadView() {
         view = createView
@@ -35,8 +48,19 @@ class CreateVC: UIViewController {
     
     
     @objc func buttonPressed(_ sender: UIBarButtonItem){
-          // put action here
+          saveFlashCard()
        }
+    
+    func saveFlashCard() {
+        flashcard = SavedCards(cardTitle: createView.questionTextField.text ?? "", factOne: createView.answerTextViewOne.text ?? "", factTwo: createView.answerTextViewTwo.text ?? "")
+        delegate?.didSave(thisCard: flashcard)
+        do {
+            try dataPersistence.createItem(flashcard)
+        } catch {
+            print("saving error: (error)")
+        }
+        
+    }
     
     
 }

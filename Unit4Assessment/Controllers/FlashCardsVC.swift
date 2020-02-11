@@ -13,10 +13,14 @@ class FlashCardsVC: UIViewController {
     
     private let flashCardsView = FlashCardsView()
     
-    private var flashCards = [Card]() {
+    private var savedFlashCards = [Card]() {
         didSet {
-            DispatchQueue.main.async {
-                self.flashCardsView.collectionView.reloadData()
+            flashCardsView.collectionView.reloadData()
+            print("There are \(savedFlashCards.count) flash cards")
+            if savedFlashCards.isEmpty {
+            flashCardsView.collectionView.backgroundView = EmptyView(title: "Saved Flash Cards", message: "You better add some cards to this page and start studying if you want to make that 🍞")
+            } else {
+                flashCardsView.collectionView.backgroundView = nil
             }
         }
     }
@@ -39,11 +43,18 @@ class FlashCardsVC: UIViewController {
         
     }
     
-}
+//    private func fetchSavedFlashCards() {
+//            do {
+//                savedFlashCards = try dataPersistence.loadItems()
+//            } catch {
+//                print("error fetching articles")
+//            }
+//        }
+   }
 
 extension FlashCardsVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return savedFlashCards.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,3 +76,7 @@ extension FlashCardsVC:UICollectionViewDelegateFlowLayout {
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }
+
+
+
+ // extension FlashCardsVC:
