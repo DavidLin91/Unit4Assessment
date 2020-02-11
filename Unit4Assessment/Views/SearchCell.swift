@@ -10,6 +10,14 @@ import UIKit
 
 class SearchCell: UICollectionViewCell {
     
+    private var isShowingAnswer = false
+    
+    private lazy var longPressedGesture: UILongPressGestureRecognizer = {
+        let gesture = UILongPressGestureRecognizer()
+        gesture.addTarget(self, action: #selector(didLongPress(_:)))
+        return gesture
+    }()
+    
     
     private lazy var flashCardQuestion: UILabel = {
         let label = UILabel()
@@ -37,12 +45,20 @@ class SearchCell: UICollectionViewCell {
     }
     
     
+    
+    
+    
+    
+    
+    
     private func setupFlashCardQuestionConstraints() {
         addSubview(flashCardQuestion)
         flashCardQuestion.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             flashCardQuestion.centerXAnchor.constraint(equalTo: centerXAnchor),
-            flashCardQuestion.centerYAnchor.constraint(equalTo: centerYAnchor)
+            flashCardQuestion.centerYAnchor.constraint(equalTo: centerYAnchor),
+            flashCardQuestion.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            flashCardQuestion.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
     
