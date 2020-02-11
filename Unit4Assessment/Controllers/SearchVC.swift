@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DataPersistence
 
 class SearchVC: UIViewController {
     
@@ -15,7 +16,9 @@ class SearchVC: UIViewController {
     
     private var flashCards = [Card]() {
         didSet {
-            self.searchView.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.searchView.collectionView.reloadData()
+            }
         }
     }
     
@@ -30,25 +33,40 @@ class SearchVC: UIViewController {
         
         searchView.collectionView.dataSource = self
         searchView.collectionView.register(SearchCell.self, forCellWithReuseIdentifier: "searchCell")
-        
         searchView.searchBar.delegate = self
+        loadFlashCards()
     }
+    
+    
+    private func loadFlashCards() {
+        FlashCardsAPIClient.fetchFlashCards { [weak self] (result) in
+            switch result {
+            case .failure(let appError):
+                print("Could not fetch flashCards \(appError)")
+            case .success(let flashCards):
+                self?.flashCards = flashCards
+            }
+        }
+    }
+    
     
     
 }
 
 extension SearchVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: replace with flashcards.count
-        return 10
+        print(flashCards.count)
+        return flashCards.count
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as? SearchCell else {
             fatalError("could not downcast to NewsCell")
         }
-       // let flashCard = flashCards[indexPath.row]
+        let flashCard = flashCards[indexPath.row]
         cell.backgroundColor = .white
+        cell.configureCell(for: flashCard)
         return cell
     }
 }
@@ -63,11 +81,6 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }
-
-
-
-
-
 
 
 

@@ -24,8 +24,6 @@ struct FlashCardsAPIClient {
             case.failure(let appError):
                 completion(.failure(.networkClientError(appError)))
             case .success(let data):
-              //  let printData = String(data: data, encoding: .utf8)
-              //  print(printData)
                 do {
                     let flashCards = try JSONDecoder().decode(FlashCards.self, from: data)
                     completion(.success(flashCards.cards))
