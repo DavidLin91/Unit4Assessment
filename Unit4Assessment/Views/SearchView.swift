@@ -18,6 +18,13 @@ class SearchView: UIView {
         return sb
     }()
     
+    public lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        cv.backgroundColor = #colorLiteral(red: 0.5094134212, green: 0.7622374296, blue: 1, alpha: 1)
+        return cv
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -32,6 +39,7 @@ class SearchView: UIView {
     
     private func commonInit() {
         setupSearchBarConstraints()
+        setupCollectionViewConstraints()
     }
     
     private func setupSearchBarConstraints() {
@@ -44,6 +52,18 @@ class SearchView: UIView {
             searchBar.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
+    
+    private func setupCollectionViewConstraints() {
+        addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
     
     
     
