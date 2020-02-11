@@ -12,6 +12,13 @@
 		579023A123F2EE3B000AA216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 579023A023F2EE3B000AA216 /* Assets.xcassets */; };
 		579023A423F2EE3B000AA216 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579023A223F2EE3B000AA216 /* LaunchScreen.storyboard */; };
 		579023AF23F2EE3B000AA216 /* Unit4AssessmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579023AE23F2EE3B000AA216 /* Unit4AssessmentTests.swift */; };
+		63284D2F23F2FAF6000F34B0 /* FlashCardsTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63284D2E23F2FAF6000F34B0 /* FlashCardsTBC.swift */; };
+		63284D3223F2FB94000F34B0 /* FlashCardsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63284D3123F2FB94000F34B0 /* FlashCardsVC.swift */; };
+		63284D3423F2FBE2000F34B0 /* CreateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63284D3323F2FBE2000F34B0 /* CreateVC.swift */; };
+		63284D3623F2FBEF000F34B0 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63284D3523F2FBEF000F34B0 /* SearchVC.swift */; };
+		63284D3823F2FC05000F34B0 /* FlashCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63284D3723F2FC05000F34B0 /* FlashCardsView.swift */; };
+		63284D3A23F2FC1F000F34B0 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63284D3923F2FC1F000F34B0 /* CreateView.swift */; };
+		63284D3C23F2FC29000F34B0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63284D3B23F2FC29000F34B0 /* SearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +41,13 @@
 		579023AA23F2EE3B000AA216 /* Unit4AssessmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Unit4AssessmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		579023AE23F2EE3B000AA216 /* Unit4AssessmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit4AssessmentTests.swift; sourceTree = "<group>"; };
 		579023B023F2EE3B000AA216 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63284D2E23F2FAF6000F34B0 /* FlashCardsTBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsTBC.swift; sourceTree = "<group>"; };
+		63284D3123F2FB94000F34B0 /* FlashCardsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsVC.swift; sourceTree = "<group>"; };
+		63284D3323F2FBE2000F34B0 /* CreateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVC.swift; sourceTree = "<group>"; };
+		63284D3523F2FBEF000F34B0 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		63284D3723F2FC05000F34B0 /* FlashCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardsView.swift; sourceTree = "<group>"; };
+		63284D3923F2FC1F000F34B0 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
+		63284D3B23F2FC29000F34B0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +91,7 @@
 			children = (
 				63284D2D23F2F95E000F34B0 /* Network Services */,
 				63284D2C23F2F955000F34B0 /* Models */,
+				63284D3023F2FB38000F34B0 /* Views */,
 				63284D2B23F2F94F000F34B0 /* Controllers */,
 				63284D2A23F2F946000F34B0 /* Supporting Files */,
 				579023A523F2EE3B000AA216 /* Info.plist */,
@@ -107,6 +122,10 @@
 		63284D2B23F2F94F000F34B0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				63284D2E23F2FAF6000F34B0 /* FlashCardsTBC.swift */,
+				63284D3123F2FB94000F34B0 /* FlashCardsVC.swift */,
+				63284D3323F2FBE2000F34B0 /* CreateVC.swift */,
+				63284D3523F2FBEF000F34B0 /* SearchVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -123,6 +142,16 @@
 			children = (
 			);
 			path = "Network Services";
+			sourceTree = "<group>";
+		};
+		63284D3023F2FB38000F34B0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				63284D3723F2FC05000F34B0 /* FlashCardsView.swift */,
+				63284D3923F2FC1F000F34B0 /* CreateView.swift */,
+				63284D3B23F2FC29000F34B0 /* SearchView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,7 +254,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63284D3623F2FBEF000F34B0 /* SearchVC.swift in Sources */,
+				63284D3C23F2FC29000F34B0 /* SearchView.swift in Sources */,
 				5790239823F2EE39000AA216 /* AppDelegate.swift in Sources */,
+				63284D3A23F2FC1F000F34B0 /* CreateView.swift in Sources */,
+				63284D3223F2FB94000F34B0 /* FlashCardsVC.swift in Sources */,
+				63284D3423F2FBE2000F34B0 /* CreateVC.swift in Sources */,
+				63284D3823F2FC05000F34B0 /* FlashCardsView.swift in Sources */,
+				63284D2F23F2FAF6000F34B0 /* FlashCardsTBC.swift in Sources */,
 				5790239A23F2EE39000AA216 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
