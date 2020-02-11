@@ -45,11 +45,11 @@ class CreateVC: UIViewController {
     
     
     
-    
-    
     @objc func buttonPressed(_ sender: UIBarButtonItem){
           saveFlashCard()
        }
+    
+    
     
     func saveFlashCard() {
         flashcard = SavedCards(cardTitle: createView.questionTextField.text ?? "", factOne: createView.answerTextViewOne.text ?? "", factTwo: createView.answerTextViewTwo.text ?? "")

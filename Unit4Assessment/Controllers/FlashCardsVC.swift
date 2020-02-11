@@ -13,7 +13,9 @@ class FlashCardsVC: UIViewController {
     
     private let flashCardsView = FlashCardsView()
     
-    private var savedFlashCards = [Card]() {
+    public var dataPersistence: DataPersistence<SavedCards>!
+    
+    private var savedFlashCards = [SavedCards]() {
         didSet {
             flashCardsView.collectionView.reloadData()
             print("There are \(savedFlashCards.count) flash cards")
@@ -43,13 +45,13 @@ class FlashCardsVC: UIViewController {
         
     }
     
-//    private func fetchSavedFlashCards() {
-//            do {
-//                savedFlashCards = try dataPersistence.loadItems()
-//            } catch {
-//                print("error fetching articles")
-//            }
-//        }
+    private func fetchSavedFlashCards() {
+            do {
+                savedFlashCards = try dataPersistence.loadItems()
+            } catch {
+                print("error fetching articles")
+            }
+        }
    }
 
 extension FlashCardsVC: UICollectionViewDataSource {
@@ -79,4 +81,14 @@ extension FlashCardsVC:UICollectionViewDelegateFlowLayout {
 
 
 
- // extension FlashCardsVC:
+extension FlashCardsVC: DataPersistenceDelegate {
+    func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
+        fetchSavedFlashCards()
+    }
+    
+    func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
+        fetchSavedFlashCards()
+    }
+    
+    
+}
