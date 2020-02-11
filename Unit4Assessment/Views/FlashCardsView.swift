@@ -11,12 +11,12 @@ import UIKit
 class FlashCardsView: UIView {
     
     public lazy var collectionView: UICollectionView = {
-           let layout = UICollectionViewFlowLayout()
-           layout.scrollDirection = .vertical
-           let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-           cv.backgroundColor = #colorLiteral(red: 0.5094134212, green: 0.7622374296, blue: 1, alpha: 1)
-           return cv
-       }()
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        cv.backgroundColor = #colorLiteral(red: 0.5094134212, green: 0.7622374296, blue: 1, alpha: 1)
+        return cv
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -32,7 +32,7 @@ class FlashCardsView: UIView {
     private func commonInit() {
         setupCollectionViewConstraints()
     }
-        
+    
     
     private func setupCollectionViewConstraints() {
         addSubview(collectionView)

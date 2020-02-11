@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DataPersistence
 
 class FlashCardsVC: UIViewController {
     
@@ -23,6 +24,11 @@ class FlashCardsVC: UIViewController {
     override func loadView() {
         view = flashCardsView
     }
+    
+    override func viewWillLayoutSubviews() {
+        self.navigationItem.title = "Flash Cards"
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +60,8 @@ extension FlashCardsVC: UICollectionViewDataSource {
 extension FlashCardsVC:UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let maxSize: CGSize = UIScreen.main.bounds.size   // create a constant for the max size of screen
-        let itemWidth: CGFloat = maxSize.width
-        let itemHeight: CGFloat = maxSize.height * 0.20 // ~30% of screen
+        let itemWidth: CGFloat = maxSize.width * 0.80  // 80% of screen
+        let itemHeight: CGFloat = maxSize.height * 0.30 // ~30% of screen
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }

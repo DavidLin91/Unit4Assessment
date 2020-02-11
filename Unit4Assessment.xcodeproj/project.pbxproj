@@ -163,9 +163,9 @@
 			isa = PBXGroup;
 			children = (
 				63284D3723F2FC05000F34B0 /* FlashCardsView.swift */,
-				632A6CA023F3323E00F52A96 /* FlashCardCell.swift */,
 				63284D3923F2FC1F000F34B0 /* CreateView.swift */,
 				63284D3B23F2FC29000F34B0 /* SearchView.swift */,
+				632A6CA023F3323E00F52A96 /* FlashCardCell.swift */,
 				63284D4423F309E4000F34B0 /* SearchCell.swift */,
 			);
 			path = Views;

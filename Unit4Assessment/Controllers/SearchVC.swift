@@ -26,6 +26,11 @@ class SearchVC: UIViewController {
         view = searchView
     }
     
+    override func viewWillLayoutSubviews() {
+        self.navigationItem.title = "Search Flash Cards"
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

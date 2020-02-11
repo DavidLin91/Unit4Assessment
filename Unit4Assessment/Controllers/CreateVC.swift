@@ -9,12 +9,24 @@
 import UIKit
 
 class CreateVC: UIViewController {
-
-   
+    
+    
+    override func viewWillLayoutSubviews() {
+        self.navigationItem.title = "Create Quiz"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(buttonPressed(_:)))
     }
+    
+    
+    @objc func buttonPressed(_ sender: UIBarButtonItem){
+          // put action here
+       }
+    
     
 }
