@@ -11,6 +11,14 @@ import UIKit
 class SearchView: UIView {
     
     
+    public lazy var searchBar: UISearchBar = {
+     let sb = UISearchBar()
+        sb.autocapitalizationType = .none
+        sb.placeholder = "enter search here"
+        return sb
+    }()
+    
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -23,8 +31,21 @@ class SearchView: UIView {
     
     
     private func commonInit() {
-        
+        setupSearchBarConstraints()
     }
+    
+    private func setupSearchBarConstraints() {
+        addSubview(searchBar)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+    }
+    
+    
     
     
     
