@@ -26,6 +26,7 @@ class SearchCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.font = UIFont .preferredFont(forTextStyle: .subheadline)
         label.text = "FlashCardQuestion"
+        label.alpha = 1
         label.textColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         return label
     }()
@@ -35,6 +36,7 @@ class SearchCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.font = UIFont .preferredFont(forTextStyle: .subheadline)
         label.text = "FlashCardAnswer"
+        label.alpha = 0
         return label
     }()
     
@@ -62,19 +64,35 @@ class SearchCell: UICollectionViewCell {
         setupFlashCardQuestionConstraints()
         setupFlashCardAnswerConstraints()
         setupSaveButtonConstraints()
+        addGestureRecognizer(longPressedGesture)
     }
     
     // flip animation
-    @objc private func didLongPress(_ gesture: UILongPressGestureRecognizer) {
-           guard let currentScreen = currentScreen else { return }
-           if gesture.state == .began || gesture.state == .changed {
-               print("long pressed")
-               return
-           }
-           
-           isShowingAnswer.toggle() // true -> false -> true
-        currentScreen.facts
-       }
+   @objc private func didLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began || gesture.state == .changed {
+            return
+        }
+        isShowingAnswer.toggle()
+       // self.flashCardAnswer.text = currentScreen
+        self.animate()
+    }
+    
+    
+    private func animate() {
+        let duration: Double = 1.0 // seconds
+        if isShowingAnswer {
+            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromRight], animations: {
+                self.flashCardAnswer.alpha = 1.0
+                self.flashCardQuestion.alpha = 0.0
+            }, completion: nil)
+        } else {
+            UIView.transition(with: self, duration: duration, options: [.transitionFlipFromLeft], animations: {
+                self.flashCardAnswer.alpha = 0.0
+                self.flashCardQuestion.alpha = 1.0
+            }, completion: nil)
+        }
+    }
+    
     
     
     // Bookmark Button
@@ -123,6 +141,10 @@ class SearchCell: UICollectionViewCell {
     
     public func configureCell(for flashCard: Card) {
         flashCardQuestion.text = flashCard.cardTitle
+        flashCardAnswer.text = """
+                                \(flashCard.facts[0])
+                                \(flashCard.facts[1])
+                               """
     }
     
     
