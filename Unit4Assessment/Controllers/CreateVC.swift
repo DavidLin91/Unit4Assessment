@@ -10,6 +10,11 @@ import UIKit
 
 class CreateVC: UIViewController {
     
+    private let createView = CreateView()
+    
+    override func loadView() {
+        view = createView
+    }
     
     override func viewWillLayoutSubviews() {
         self.navigationItem.title = "Create Quiz"
@@ -17,11 +22,16 @@ class CreateVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        
-        
+        view.backgroundColor = #colorLiteral(red: 0.5094134212, green: 0.7622374296, blue: 1, alpha: 1)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(buttonPressed(_:)))
+        navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+     // need to figure a way to enable when pressed
+        //   navigationItem.rightBarButtonItem?.isEnabled = false
+        
     }
+    
+    
+    
     
     
     @objc func buttonPressed(_ sender: UIBarButtonItem){
