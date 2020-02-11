@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct FlashCards: Codable, Equatable {
-    let cards: [Card]
-}
+//struct FlashCards: Codable, Equatable {
+//    let cards: [Card]
+//}
 
-struct Card: Codable, Equatable {
+struct Cards: Codable, Equatable {
     let id: String
     let cardTitle: String
     let facts: [String]

@@ -13,9 +13,9 @@ class FlashCardsVC: UIViewController {
     
     private let flashCardsView = FlashCardsView()
     
-    public var dataPersistence: DataPersistence<SavedCards>!
+    public var dataPersistence: DataPersistence<Cards>!
     
-    private var savedFlashCards = [SavedCards]() {
+    private var savedFlashCards = [Cards]() {
         didSet {
             flashCardsView.collectionView.reloadData()
             print("There are \(savedFlashCards.count) flash cards")

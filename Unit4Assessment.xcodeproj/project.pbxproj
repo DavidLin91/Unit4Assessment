@@ -26,7 +26,7 @@
 		632A6C9F23F32D5A00F52A96 /* FlashCards.json in Resources */ = {isa = PBXBuildFile; fileRef = 632A6C9E23F32D5A00F52A96 /* FlashCards.json */; };
 		632A6CA123F3323E00F52A96 /* FlashCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A6CA023F3323E00F52A96 /* FlashCardCell.swift */; };
 		632A6CA323F35A0C00F52A96 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A6CA223F35A0C00F52A96 /* EmptyView.swift */; };
-		632A6CA523F3608100F52A96 /* SavedCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A6CA423F3608100F52A96 /* SavedCards.swift */; };
+		632A6CA923F3756200F52A96 /* localAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A6CA823F3756200F52A96 /* localAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +62,7 @@
 		632A6C9E23F32D5A00F52A96 /* FlashCards.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FlashCards.json; sourceTree = "<group>"; };
 		632A6CA023F3323E00F52A96 /* FlashCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardCell.swift; sourceTree = "<group>"; };
 		632A6CA223F35A0C00F52A96 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
-		632A6CA423F3608100F52A96 /* SavedCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCards.swift; sourceTree = "<group>"; };
+		632A6CA823F3756200F52A96 /* localAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = localAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				63284D3D23F300B1000F34B0 /* FlashCards.swift */,
-				632A6CA423F3608100F52A96 /* SavedCards.swift */,
 				632A6C9E23F32D5A00F52A96 /* FlashCards.json */,
 			);
 			path = Models;
@@ -160,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				63284D4223F30367000F34B0 /* FlashCardsAPIClient.swift */,
+				632A6CA823F3756200F52A96 /* localAPIClient.swift */,
 			);
 			path = "Network Services";
 			sourceTree = "<group>";
@@ -287,7 +287,7 @@
 				63284D3623F2FBEF000F34B0 /* SearchVC.swift in Sources */,
 				63284D4523F309E4000F34B0 /* SearchCell.swift in Sources */,
 				63284D4323F30367000F34B0 /* FlashCardsAPIClient.swift in Sources */,
-				632A6CA523F3608100F52A96 /* SavedCards.swift in Sources */,
+				632A6CA923F3756200F52A96 /* localAPIClient.swift in Sources */,
 				63284D3C23F2FC29000F34B0 /* SearchView.swift in Sources */,
 				5790239823F2EE39000AA216 /* AppDelegate.swift in Sources */,
 				63284D3A23F2FC1F000F34B0 /* CreateView.swift in Sources */,

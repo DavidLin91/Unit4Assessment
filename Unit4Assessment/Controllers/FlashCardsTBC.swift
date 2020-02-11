@@ -12,11 +12,13 @@ import DataPersistence
 class FlashCardsTBC: UITabBarController {
     
     // 1. Setting up dataPersistence
-    private var flashCardPersistence = DataPersistence<SavedCards>(filename: "flashcards.plist")
+    private var dataPersistence = DataPersistence<Cards>(filename: "flashcards.plist")
     
     private lazy var flashCardsVC: FlashCardsVC = {
         let viewController = FlashCardsVC()
         viewController.tabBarItem  = UITabBarItem(title: "Flash Cards", image: UIImage(systemName: "doc.plaintext"), tag: 0)
+        viewController.dataPersistence = dataPersistence
+        viewController.dataPersistence.delegate = viewController
         return viewController
     }()
     

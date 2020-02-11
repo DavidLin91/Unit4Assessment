@@ -14,7 +14,7 @@ class SearchVC: UIViewController {
     private let searchView = SearchView()
     
     
-    private var flashCards = [Card]() {
+    private var flashCards = [Cards]() {
         didSet {
             DispatchQueue.main.async {
                 self.searchView.collectionView.reloadData()

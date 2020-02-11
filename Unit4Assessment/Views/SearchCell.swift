@@ -10,7 +10,7 @@ import UIKit
 
 class SearchCell: UICollectionViewCell {
     
-    private var currentScreen: Card!
+    private var currentScreen: Cards!
     
     private var isShowingAnswer = false
     
@@ -139,7 +139,7 @@ class SearchCell: UICollectionViewCell {
     
     
     
-    public func configureCell(for flashCard: Card) {
+    public func configureCell(for flashCard: Cards) {
         flashCardQuestion.text = flashCard.cardTitle
         flashCardAnswer.text = """
                                 \(flashCard.facts[0])

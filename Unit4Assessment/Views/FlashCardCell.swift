@@ -10,7 +10,7 @@ import UIKit
 
 class FlashCardCell: UICollectionViewCell {
     
-    private var currentScreen: Card!
+    private var currentScreen: Cards!
     
     private var isShowingAnswer = false
     
