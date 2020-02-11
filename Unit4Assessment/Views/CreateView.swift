@@ -10,6 +10,9 @@ import UIKit
 
 class CreateView: UIView {
     
+   
+    
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -24,6 +27,7 @@ class CreateView: UIView {
     private func commonInit() {
         
     }
+    
     
     
 }
