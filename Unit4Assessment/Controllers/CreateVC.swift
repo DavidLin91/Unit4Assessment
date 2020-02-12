@@ -47,45 +47,46 @@ class CreateVC: UIViewController {
     }
     
     func saveFlashCard() {
-           cards = Cards(quizTitle: createView.questionTextField.text!, facts: [createView.answerTextViewOne.text!, createView.answerTextViewTwo.text!])
-           do {
+        cards = Cards(quizTitle: createView.questionTextField.text!, facts: [createView.answerTextViewOne.text!, createView.answerTextViewTwo.text!])
+        do {
             // Step 3: data persistence
-               try dataPersistence.createItem(cards)
-           } catch {
-               print("saving error: \(error)")
-           }
-
-       }
-       
-       func clearTextFields() {
-           createView.questionTextField.text = nil
-           createView.answerTextViewOne.text = nil
-           createView.answerTextViewTwo.text = nil
-       }
-
-    
-        func emptyAlert(){
-            let showAlert = UIAlertController(title: "Failed", message: "Please enter all fields", preferredStyle: .alert)
-            showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(showAlert, animated: true, completion: nil)
+            try dataPersistence.createItem(cards)
+        } catch {
+            print("saving error: \(error)")
         }
-    
-        func successAlert(){
-            let showAlert = UIAlertController(title: "Success", message: "Flash card has been added to your deck!", preferredStyle: .alert)
-            showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(showAlert, animated: true, completion: nil)
-        }
-    
         
+    }
+    
+    func clearTextFields() {
+        createView.questionTextField.text = nil
+        createView.answerTextViewOne.text = nil
+        createView.answerTextViewTwo.text = nil
+    }
+    
+    
+    func emptyAlert(){
+        let showAlert = UIAlertController(title: "Failed", message: "Please enter all fields", preferredStyle: .alert)
+        showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(showAlert, animated: true, completion: nil)
+    }
+    
+    func successAlert(){
+        let showAlert = UIAlertController(title: "Success", message: "Flash card has been added to your deck!", preferredStyle: .alert)
+        showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(showAlert, animated: true, completion: nil)
+    }
+    
+    
     func navigateFlashCardTab() {
-        
+        let newViewController = FlashCardsVC()
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     
     
     @objc func buttonPressed(_ sender: UIBarButtonItem){
         if createView.questionTextField.text!.isEmpty || createView.answerTextViewOne.text!.isEmpty || createView.answerTextViewTwo.text!.isEmpty {
-        emptyAlert()
+            emptyAlert()
         } else {
             saveFlashCard()
             clearTextFields()
@@ -115,3 +116,4 @@ extension CreateVC: UITextViewDelegate {
         return true
     }
 }
+
