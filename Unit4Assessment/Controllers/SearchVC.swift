@@ -96,6 +96,7 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
         let itemHeight: CGFloat = maxSize.height * 0.30 // ~30% of screen
         return CGSize(width: itemWidth, height: itemHeight)
     }
+    
 }
 
 
@@ -103,10 +104,10 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
 extension SearchVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {
-            // if text is empty, reload all flash cards
+            loadFlashCards()
             return
         }
-        // filter cards based on searchText
+        flashCards = flashCards.filter {$0.quizTitle.lowercased().contains(searchText.lowercased())}
     }
 }
 

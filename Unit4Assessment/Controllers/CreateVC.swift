@@ -40,38 +40,68 @@ class CreateVC: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         // need to figure a way to enable when pressed
         //   navigationItem.rightBarButtonItem?.isEnabled = false
-        
+        createView.questionTextField.delegate = self
+        createView.answerTextViewOne.delegate = self
+        createView.answerTextViewTwo.delegate = self
     }
-    
-    
-    
-    @objc func buttonPressed(_ sender: UIBarButtonItem){
-        saveFlashCard()
-    }
-    
-    
     
     func saveFlashCard() {
-        cards = Cards(quizTitle: createView.questionTextField.text!, facts: [createView.answerTextViewOne.text! + createView.answerTextViewTwo.text!])
-        do {
-            try dataPersistence.createItem(cards)
-        } catch {
-            print("saving error: \(error)")
-        }
+           cards = Cards(quizTitle: createView.questionTextField.text!, facts: [createView.answerTextViewOne.text! + createView.answerTextViewTwo.text!])
+           do {
+               try dataPersistence.createItem(cards)
+           } catch {
+               print("saving error: \(error)")
+           }
 
-    }
+       }
+       
+       func clearTextFields() {
+           createView.questionTextField.text = nil
+           createView.answerTextViewOne.text = nil
+           createView.answerTextViewTwo.text = nil
+       }
+
     
+        func emptyAlert(){
+            let showAlert = UIAlertController(title: "Failed", message: "Please enter all fields", preferredStyle: .alert)
+            showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(showAlert, animated: true, completion: nil)
+        }
+    
+        func successAlert(){
+            let showAlert = UIAlertController(title: "Success", message: "Flash card has been added to your deck!", preferredStyle: .alert)
+            showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(showAlert, animated: true, completion: nil)
+        }
+    
+    @objc func buttonPressed(_ sender: UIBarButtonItem){
+        if createView.questionTextField.text!.isEmpty || createView.answerTextViewOne.text!.isEmpty || createView.answerTextViewTwo.text!.isEmpty {
+        emptyAlert()
+        } else {
+            saveFlashCard()
+            clearTextFields()
+            successAlert()
+        }
+    }
     
 }
 
+
+
+
 extension CreateVC: UITextFieldDelegate {
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
 extension CreateVC: UITextViewDelegate {
-    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        textView.resignFirstResponder()
-        cards.facts = [textView.text ?? "no description"]
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
         return true
     }
 }

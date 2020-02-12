@@ -42,7 +42,7 @@ class FlashCardsVC: UIViewController {
         flashCardsView.collectionView.register(FlashCardCell.self, forCellWithReuseIdentifier: "flashCardCell")
         flashCardsView.collectionView.delegate = self
         flashCardsView.collectionView.dataSource = self
-        
+        fetchSavedFlashCards()
     }
     
     private func fetchSavedFlashCards() {
