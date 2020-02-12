@@ -14,6 +14,17 @@ import Foundation
 
 struct Cards: Codable, Equatable {
     let id: String
-    let cardTitle: String
+    let quizTitle: String
     let facts: [String]
+    
+    static func getCards(from jsonData: Data) -> [Cards] {
+        do {
+            let cards = try JSONDecoder().decode([Cards].self, from: jsonData)
+            return cards
+        } catch {
+            print(error)
+            return []
+        }
+    }
+    
 }

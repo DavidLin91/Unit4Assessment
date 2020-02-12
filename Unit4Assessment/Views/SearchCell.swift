@@ -140,7 +140,7 @@ class SearchCell: UICollectionViewCell {
     
     
     public func configureCell(for flashCard: Cards) {
-        flashCardQuestion.text = flashCard.cardTitle
+        flashCardQuestion.text = flashCard.quizTitle
         flashCardAnswer.text = """
                                 \(flashCard.facts[0])
                                 \(flashCard.facts[1])
