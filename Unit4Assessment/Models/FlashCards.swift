@@ -12,7 +12,7 @@ import Foundation
 //    let cards: [Card]
 //}
 
-struct Cards: Codable, Equatable {
+struct Cards: Codable & Equatable {
   //let id: String
     var quizTitle: String
     var facts: [String]

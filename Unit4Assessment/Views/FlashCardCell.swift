@@ -8,9 +8,19 @@
 
 import UIKit
 
+// step 1: custom protocol
+protocol FlashCardDelegate: AnyObject {
+    func buttonPressed(savedFlashCards: FlashCardCell, card: Cards)
+}
+
+
 class FlashCardCell: UICollectionViewCell {
     
-    private var currentScreen: Cards!
+    
+    // step 2: custom protocol
+    weak var delegate: FlashCardDelegate?
+    
+    public var currentScreen: Cards!
     
     private var isShowingAnswer = false
     
@@ -94,10 +104,9 @@ class FlashCardCell: UICollectionViewCell {
     
     
     
-    
+    // step 3 custom protocol
     @objc private func editButtonPressed(_sender: UIButton) {
-        // Step 3: custom protocl (step 4: savedArticleVC, set the info in the cellForItemAt)
-        // captures the data for the specific cell its cli
+        delegate?.buttonPressed(savedFlashCards: self, card: currentScreen)
     }
     
     
@@ -138,10 +147,9 @@ class FlashCardCell: UICollectionViewCell {
    public func configureCell(for flashCard: Cards) {
         flashCardQuestion.text = flashCard.quizTitle
         flashCardAnswer.text = """
-                                \(flashCard.facts.first)
-                                \(flashCard.facts.last)
+                                \(flashCard.facts.first!)
+                                \(flashCard.facts.last!)
                                """
     }
-    
     
 }

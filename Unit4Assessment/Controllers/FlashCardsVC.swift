@@ -13,6 +13,7 @@ class FlashCardsVC: UIViewController {
     
     private let flashCardsView = FlashCardsView()
     
+    // step 4: data persistence
     public var dataPersistence: DataPersistence<Cards>!
     
     private var savedFlashCards = [Cards]() {
@@ -67,6 +68,8 @@ extension FlashCardsVC: UICollectionViewDataSource {
         let card = savedFlashCards[indexPath.row]
         cell.backgroundColor = .white
         cell.configureCell(for: card)
+        cell.currentScreen = card
+        cell.delegate = self
         return cell
     }
     
@@ -83,7 +86,7 @@ extension FlashCardsVC:UICollectionViewDelegateFlowLayout {
 }
 
 
-
+// step 5: data persistence
 extension FlashCardsVC: DataPersistenceDelegate {
     func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
         loadSavedFlashCards()
@@ -92,6 +95,33 @@ extension FlashCardsVC: DataPersistenceDelegate {
     func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
         loadSavedFlashCards()
     }
-    
-    
+}
+
+
+extension FlashCardsVC: FlashCardDelegate {
+    func buttonPressed(savedFlashCards: FlashCardCell, card: Cards) {
+        
+        print("button extension called \(card.quizTitle)")
+        
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+            self.deleteCard(card: card)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+    }
+    private func deleteCard(card: Cards) {
+        guard let index = savedFlashCards.firstIndex(of: card) else {
+            return
+        }
+        do {
+            try dataPersistence.deleteItem(at: index)
+            
+        } catch {
+            print("issue deleting card  due to error: \(error)")
+        }
+    }
 }

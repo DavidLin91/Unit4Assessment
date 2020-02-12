@@ -18,6 +18,7 @@ class CreateVC: UIViewController {
     
     private let createView = CreateView()
     
+    // Step 2: Setting up data persistence and delegate
     public var dataPersistence: DataPersistence<Cards>!
     
     weak var delegate: SaveFlashCardDelegate?
@@ -48,6 +49,7 @@ class CreateVC: UIViewController {
     func saveFlashCard() {
            cards = Cards(quizTitle: createView.questionTextField.text!, facts: [createView.answerTextViewOne.text!, createView.answerTextViewTwo.text!])
            do {
+            // Step 3: data persistence
                try dataPersistence.createItem(cards)
            } catch {
                print("saving error: \(error)")
