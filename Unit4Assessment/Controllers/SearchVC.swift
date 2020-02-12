@@ -71,7 +71,6 @@ class SearchVC: UIViewController {
 
 extension SearchVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(flashCards.count)
         return flashCards.count
     }
     
@@ -96,6 +95,14 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
         let itemHeight: CGFloat = maxSize.height * 0.30 // ~30% of screen
         return CGSize(width: itemWidth, height: itemHeight)
     }
+    
+    func scrollViewDidScroll(_scrollView: UIScrollView) {
+        if searchView.searchBar.isFirstResponder {
+            searchView.searchBar.resignFirstResponder()
+        }
+    }
+    
+    
     
 }
 

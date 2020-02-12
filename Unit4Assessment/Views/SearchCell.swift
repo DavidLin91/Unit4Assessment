@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol SearchCardDelegate: AnyObject {
+    func buttonPressed(savedFlashCards: SearchCell, card: Cards)
+}
+
 class SearchCell: UICollectionViewCell {
     
-    private var currentScreen: Cards!
+    weak var delegate: SearchCardDelegate?
+    
+    public var currentScreen: Cards!
     
     private var isShowingAnswer = false
     
@@ -98,7 +104,7 @@ class SearchCell: UICollectionViewCell {
     // Bookmark Button
     @objc private func saveButtonPressed(_sender: UIButton) {
         // Step 3: custom protocl (step 4: savedArticleVC, set the info in the cellForItemAt)
-        // captures the data for the specific cell its clicked on
+         delegate?.buttonPressed(savedFlashCards: self, card: currentScreen)
     }
     
     private func setupSaveButtonConstraints() {
