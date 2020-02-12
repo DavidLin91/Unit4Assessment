@@ -42,10 +42,10 @@ class FlashCardsVC: UIViewController {
         flashCardsView.collectionView.register(FlashCardCell.self, forCellWithReuseIdentifier: "flashCardCell")
         flashCardsView.collectionView.delegate = self
         flashCardsView.collectionView.dataSource = self
-        fetchSavedFlashCards()
+        loadSavedFlashCards()
     }
     
-    private func fetchSavedFlashCards() {
+    private func loadSavedFlashCards() {
             do {
                 savedFlashCards = try dataPersistence.loadItems()
             } catch {
@@ -63,7 +63,10 @@ extension FlashCardsVC: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "flashCardCell", for: indexPath) as? FlashCardCell else {
             fatalError("could not downcast to NewsCell")
         }
+        
+        let card = savedFlashCards[indexPath.row]
         cell.backgroundColor = .white
+        cell.configureCell(for: card)
         return cell
     }
     
@@ -83,11 +86,11 @@ extension FlashCardsVC:UICollectionViewDelegateFlowLayout {
 
 extension FlashCardsVC: DataPersistenceDelegate {
     func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        fetchSavedFlashCards()
+        loadSavedFlashCards()
     }
     
     func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        fetchSavedFlashCards()
+        loadSavedFlashCards()
     }
     
     

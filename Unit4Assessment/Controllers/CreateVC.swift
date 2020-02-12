@@ -46,7 +46,7 @@ class CreateVC: UIViewController {
     }
     
     func saveFlashCard() {
-           cards = Cards(quizTitle: createView.questionTextField.text!, facts: [createView.answerTextViewOne.text! + createView.answerTextViewTwo.text!])
+           cards = Cards(quizTitle: createView.questionTextField.text!, facts: [createView.answerTextViewOne.text!, createView.answerTextViewTwo.text!])
            do {
                try dataPersistence.createItem(cards)
            } catch {

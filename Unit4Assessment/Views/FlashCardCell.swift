@@ -135,6 +135,13 @@ class FlashCardCell: UICollectionViewCell {
     }
     
     
+   public func configureCell(for flashCard: Cards) {
+        flashCardQuestion.text = flashCard.quizTitle
+        flashCardAnswer.text = """
+                                \(flashCard.facts.first)
+                                \(flashCard.facts.last)
+                               """
+    }
     
     
 }
