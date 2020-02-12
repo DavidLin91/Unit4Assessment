@@ -80,6 +80,18 @@ extension SearchVC: UICollectionViewDataSource {
     }
 }
 
+extension SearchVC: SaveFlashCardDelegate {
+    func didSave(thisCard: Cards) {
+        if dataPersistence.hasItemBeenSaved(thisCard) {
+            return
+        }
+        do {
+            try dataPersistence.createItem(thisCard)
+        } catch {
+            print("could not save due to \(error)")
+        }
+    }
+}
 
 
 extension SearchVC: UICollectionViewDelegateFlowLayout {
@@ -95,14 +107,15 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
             searchView.searchBar.resignFirstResponder()
         }
     }
-    
-    
-    
 }
 
 
 
 extension SearchVC: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)  {
+        searchBar.resignFirstResponder()
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {
             loadFlashCards()
@@ -112,16 +125,6 @@ extension SearchVC: UISearchBarDelegate {
     }
 }
 
-extension SearchVC: SaveFlashCardDelegate {
-    func didSave(thisCard: Cards) {
-        if dataPersistence.hasItemBeenSaved(thisCard) {
-            return
-        }
-        do {
-            try dataPersistence.createItem(thisCard)
-        } catch {
-            print("could not save due to \(error)")
-            
-        }
-    }
-}
+
+
+

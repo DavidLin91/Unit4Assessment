@@ -19,7 +19,6 @@ class FlashCardsVC: UIViewController {
     private var savedFlashCards = [Cards]() {
         didSet {
             flashCardsView.collectionView.reloadData()
-            print("There are \(savedFlashCards.count) flash cards")
             if savedFlashCards.isEmpty {
             flashCardsView.collectionView.backgroundView = EmptyView(title: "Saved Flash Cards", message: "You better add some cards to this page and start studying if you want to make that 🍞")
             } else {

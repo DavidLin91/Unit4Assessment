@@ -76,6 +76,13 @@ class CreateVC: UIViewController {
             present(showAlert, animated: true, completion: nil)
         }
     
+        
+    func navigateFlashCardTab() {
+        
+    }
+    
+    
+    
     @objc func buttonPressed(_ sender: UIBarButtonItem){
         if createView.questionTextField.text!.isEmpty || createView.answerTextViewOne.text!.isEmpty || createView.answerTextViewTwo.text!.isEmpty {
         emptyAlert()
@@ -83,6 +90,7 @@ class CreateVC: UIViewController {
             saveFlashCard()
             clearTextFields()
             successAlert()
+            navigateFlashCardTab()
         }
     }
     
