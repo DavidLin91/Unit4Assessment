@@ -45,14 +45,6 @@ class SearchVC: UIViewController {
     
     
     private func loadFlashCards() {
-        //        FlashCardsAPIClient.fetchFlashCards { [weak self] (result) in
-        //            switch result {
-        //            case .failure(let appError):
-        //                print("Could not fetch flashCards \(appError)")
-        //            case .success(let flashCards):
-        //                self?.flashCards = flashCards
-        //            }
-        //        }
         guard let fileURL = Bundle.main.url(forResource: "FlashCards", withExtension: "json") else {
             fatalError()
         }
@@ -81,6 +73,8 @@ extension SearchVC: UICollectionViewDataSource {
         }
         let flashCard = flashCards[indexPath.row]
         cell.backgroundColor = .white
+        cell.delegate = self
+        cell.cards = flashCard
         cell.configureCell(for: flashCard)
         return cell
     }
@@ -118,4 +112,16 @@ extension SearchVC: UISearchBarDelegate {
     }
 }
 
-
+extension SearchVC: SaveFlashCardDelegate {
+    func didSave(thisCard: Cards) {
+        if dataPersistence.hasItemBeenSaved(thisCard) {
+            return
+        }
+        do {
+            try dataPersistence.createItem(thisCard)
+        } catch {
+            print("could not save due to \(error)")
+            
+        }
+    }
+}

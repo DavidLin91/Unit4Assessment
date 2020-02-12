@@ -7,18 +7,20 @@
 //
 
 import UIKit
+import DataPersistence
 
-protocol SearchCardDelegate: AnyObject {
-    func buttonPressed(savedFlashCards: SearchCell, card: Cards)
-}
 
 class SearchCell: UICollectionViewCell {
     
-    weak var delegate: SearchCardDelegate?
+    weak var delegate: SaveFlashCardDelegate?
     
-    public var currentScreen: Cards!
+    public var dataPersistence: DataPersistence<Cards>!
+    
+    public var cards: Cards!
     
     private var isShowingAnswer = false
+    
+    let button = UIButton()
     
     private lazy var longPressedGesture: UILongPressGestureRecognizer = {
         let gesture = UILongPressGestureRecognizer()
@@ -46,8 +48,8 @@ class SearchCell: UICollectionViewCell {
         return label
     }()
     
-    public lazy var saveButton: UIButton = {
-           let button = UIButton()
+    public lazy var bookmarkButton: UIButton = {
+           
            button.setImage(UIImage(systemName: "bookmark"), for: .normal)
            
            // add target is needed to execute function.. when person clicks taget (cell, the moreButtonPressed func gets called)
@@ -99,22 +101,30 @@ class SearchCell: UICollectionViewCell {
         }
     }
     
-    
-    
     // Bookmark Button
     @objc private func saveButtonPressed(_sender: UIButton) {
-        // Step 3: custom protocl (step 4: savedArticleVC, set the info in the cellForItemAt)
-         delegate?.buttonPressed(savedFlashCards: self, card: currentScreen)
+        // Step 3: custom protocl
+        if let card = cards {
+        delegate?.didSave(thisCard: card)
+        }
+        changeBookmarkImage()
+        print("bookmark button pressed")
     }
     
+    func changeBookmarkImage(){
+         button.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        bookmarkButton.isEnabled = false
+    }
+
+    
     private func setupSaveButtonConstraints() {
-        addSubview(saveButton)
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(bookmarkButton)
+        bookmarkButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            saveButton.topAnchor.constraint(equalTo: topAnchor),
-            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            saveButton.heightAnchor.constraint(equalToConstant: 44),
-            saveButton.widthAnchor.constraint(equalTo: saveButton.heightAnchor)
+            bookmarkButton.topAnchor.constraint(equalTo: topAnchor),
+            bookmarkButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bookmarkButton.heightAnchor.constraint(equalToConstant: 44),
+            bookmarkButton.widthAnchor.constraint(equalTo: bookmarkButton.heightAnchor)
         ])
     }
     
@@ -144,8 +154,10 @@ class SearchCell: UICollectionViewCell {
     public func configureCell(for flashCard: Cards) {
         flashCardQuestion.text = flashCard.quizTitle
         flashCardAnswer.text = """
-                                \(flashCard.facts.first)
-                                \(flashCard.facts.last)
+                                Fact 1:
+                                \(flashCard.facts.first!)
+                                Fact 2:
+                                \(flashCard.facts.last!)
                                """
     }
     

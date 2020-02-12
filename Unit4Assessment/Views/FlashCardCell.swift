@@ -147,7 +147,9 @@ class FlashCardCell: UICollectionViewCell {
    public func configureCell(for flashCard: Cards) {
         flashCardQuestion.text = flashCard.quizTitle
         flashCardAnswer.text = """
+                                Fact 1:
                                 \(flashCard.facts.first!)
+                                Fact 2:
                                 \(flashCard.facts.last!)
                                """
     }

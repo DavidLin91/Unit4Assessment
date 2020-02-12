@@ -33,7 +33,6 @@ class FlashCardsTBC: UITabBarController {
         let viewController = SearchVC()
         viewController.tabBarItem  = UITabBarItem(title: "search", image: UIImage(systemName: "magnifyingglass.circle"), tag: 0)
         viewController.dataPersistence = dataPersistence
-     
         return viewController
     }()
 

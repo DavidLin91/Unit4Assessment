@@ -119,7 +119,6 @@ extension FlashCardsVC: FlashCardDelegate {
         }
         do {
             try dataPersistence.deleteItem(at: index)
-            
         } catch {
             print("issue deleting card  due to error: \(error)")
         }
