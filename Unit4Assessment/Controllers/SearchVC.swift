@@ -13,6 +13,7 @@ class SearchVC: UIViewController {
     
     private let searchView = SearchView()
     
+    public var dataPersistence: DataPersistence<Cards>!
     
     private var flashCards = [Cards]() {
         didSet {
@@ -44,27 +45,24 @@ class SearchVC: UIViewController {
     
     
     private func loadFlashCards() {
-//        FlashCardsAPIClient.fetchFlashCards { [weak self] (result) in
-//            switch result {
-//            case .failure(let appError):
-//                print("Could not fetch flashCards \(appError)")
-//            case .success(let flashCards):
-//                self?.flashCards = flashCards
-//            }
-//        }
+        //        FlashCardsAPIClient.fetchFlashCards { [weak self] (result) in
+        //            switch result {
+        //            case .failure(let appError):
+        //                print("Could not fetch flashCards \(appError)")
+        //            case .success(let flashCards):
+        //                self?.flashCards = flashCards
+        //            }
+        //        }
         guard let fileURL = Bundle.main.url(forResource: "FlashCards", withExtension: "json") else {
             fatalError()
         }
         do {
-        let data = try Data(contentsOf: fileURL)
-        let cardData = Cards.getCards(from: data)
-        flashCards = cardData
+            let data = try Data(contentsOf: fileURL)
+            let cardData = Cards.getCards(from: data)
+            flashCards = cardData
         } catch {
             print("error loading json data")
         }
-        
-        
-        
     }
     
     

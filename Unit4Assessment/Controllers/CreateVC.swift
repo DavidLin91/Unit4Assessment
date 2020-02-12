@@ -22,7 +22,7 @@ class CreateVC: UIViewController {
     
     weak var delegate: SaveFlashCardDelegate?
     
-    var flashcard: Cards!
+    var cards: Cards!
     
     
     override func loadView() {
@@ -38,7 +38,7 @@ class CreateVC: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.5094134212, green: 0.7622374296, blue: 1, alpha: 1)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(buttonPressed(_:)))
         navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-     // need to figure a way to enable when pressed
+        // need to figure a way to enable when pressed
         //   navigationItem.rightBarButtonItem?.isEnabled = false
         
     }
@@ -46,14 +46,32 @@ class CreateVC: UIViewController {
     
     
     @objc func buttonPressed(_ sender: UIBarButtonItem){
-          saveFlashCard()
-       }
+        saveFlashCard()
+    }
     
     
     
     func saveFlashCard() {
-        
+        cards = Cards(quizTitle: createView.questionTextField.text!, facts: [createView.answerTextViewOne.text! + createView.answerTextViewTwo.text!])
+        do {
+            try dataPersistence.createItem(cards)
+        } catch {
+            print("saving error: \(error)")
+        }
+
     }
     
     
+}
+
+extension CreateVC: UITextFieldDelegate {
+    
+}
+
+extension CreateVC: UITextViewDelegate {
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        textView.resignFirstResponder()
+        cards.facts = [textView.text ?? "no description"]
+        return true
+    }
 }

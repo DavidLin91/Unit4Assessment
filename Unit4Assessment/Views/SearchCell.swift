@@ -135,10 +135,6 @@ class SearchCell: UICollectionViewCell {
     }
     
     
-    
-    
-    
-    
     public func configureCell(for flashCard: Cards) {
         flashCardQuestion.text = flashCard.quizTitle
         flashCardAnswer.text = """
